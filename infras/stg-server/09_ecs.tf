@@ -8,7 +8,7 @@ resource "aws_ecs_service" "flaia-app" {
   name            = "flaia-app_${var.stage}"
   cluster         = aws_ecs_cluster.flaia-app.id
   task_definition = aws_ecs_task_definition.flaia-ecs-task.arn
-  desired_count   = 4
+  desired_count   = 2
   depends_on      = [aws_iam_role_policy.ecs-instance-role-policy]
 
   lifecycle {

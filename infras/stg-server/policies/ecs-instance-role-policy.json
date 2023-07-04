@@ -1,0 +1,31 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "application-autoscaling:*",
+        "ecs:DiscoverPollEndpoint",
+        "ecs:CreateCluster",
+        "ecs:UpdateContainerInstancesState",
+        "ecs:RegisterContainerInstance",
+        "ecs:Submit",
+        "ecs:Poll",
+        "ecs:StartTelemetrySession",
+        "ecs:DeregisterContainerInstance",
+        "logs:PutLogEvents",
+        "logs:CreateLogStream",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetAuthorizationToken",
+        "elasticloadbalancing:Describe",
+        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:DeregisterTargets"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-# ECR REPOSITORY [flaia-repository]: Initialize ecr repository
-resource "aws_ecr_repository" "flaia-repository" {
+# ECR REPOSITORY [datalake-repository]: Initialize ecr repository
+resource "aws_ecr_repository" "datalake-repository" {
   name                 = "${var.project_name}"
   image_tag_mutability = "MUTABLE"
   tags = {

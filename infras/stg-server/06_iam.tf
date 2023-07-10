@@ -1,6 +1,6 @@
 # IAM ROLE [ecs-role]: Initialize role and configure principal service
 resource "aws_iam_role" "ecs-role" {
-  name               = "ecs_host_role_flaia_v2_${var.stage}"
+  name               = "ecs_host_role_datalake_v2_${var.stage}"
   assume_role_policy = file("policies/ecs-role.json")
 }
 

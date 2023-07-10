@@ -1,6 +1,6 @@
 variable "project_name" {
   description = "Name of product"
-  default     = "flaia"
+  default     = "datalake"
 }
 
 variable "stage" {
@@ -28,16 +28,6 @@ variable "public_subnet_2_cidr" {
   default     = "172.16.16.0/20"
 }
 
-variable "public_subnet_3_cidr" {
-  description = "CIDR Block for Public Subnet 3"
-  default     = "172.16.96.0/20"
-}
-
-variable "public_subnet_4_cidr" {
-  description = "CIDR Block for Public Subnet 4"
-  default     = "172.16.112.0/20"
-}
-
 variable "private_subnet_1_cidr" {
   description = "CIDR Block for Private Subnet 1"
   default     = "172.16.32.0/20"
@@ -59,17 +49,22 @@ variable "health_check_path" {
   default     = "/health-check"
 }
 
-variable "rds_db_name" {
-}
-variable "rds_username" {
-}
-variable "rds_password" {
+variable "image_tag" {
 }
 
-variable "access_key" {
-}
-variable "secret_key" {
-}
+# variable "rds_db_name" {
+# }
+# variable "rds_username" {
+# }
+# variable "rds_password" {
+# }
+
+# variable "access_key" {
+# }
+# variable "secret_key" {
+# }
+# variable "token" {
+# }
 
 
 

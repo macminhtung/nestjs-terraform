@@ -4,12 +4,14 @@
     {
       "Effect": "Allow",
       "Action": [
-        "application-autoscaling:*",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject",
         "ecs:DiscoverPollEndpoint",
         "ecs:CreateCluster",
         "ecs:UpdateContainerInstancesState",
         "ecs:RegisterContainerInstance",
-        "ecs:Submit",
+        "ecs:Submit*",
         "ecs:Poll",
         "ecs:StartTelemetrySession",
         "ecs:DeregisterContainerInstance",

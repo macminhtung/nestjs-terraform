@@ -1,33 +1,33 @@
-# ECS TASK DEFINITION [flaia-ecs-task]
-resource "aws_ecs_task_definition" "flaia-ecs-task" {
-  family        = "flaia-app_${var.stage}"
+# ECS TASK DEFINITION [datalake-ecs-task]
+resource "aws_ecs_task_definition" "datalake-ecs-task" {
+  family        = "datalake-app_${var.stage}"
   task_role_arn = aws_iam_role.ecs-role.arn
   container_definitions = jsonencode([
     {
-      "name" : "flaia-app",
+      "name" : "${var.project_name}-${var.stage}-container"
       "cpu" : 256,
       "environment" : [
         {
           "name" : "PG_HOST",
-          "value" : "{aws_db_instance.flaia-app.address}"
+          "value" : "aws_db_instance.datalake-app.address"
         },
         {
           "name" : "PG_DB",
-          "value" : "${var.rds_db_name}"
+          "value" : "var.rds_db_name"
         },
         {
           "name" : "PG_USER",
-          "value" : "${var.rds_username}"
+          "value" : "var.rds_username"
         },
         {
           "name" : "PG_PASSWORD",
-          "value" : "${var.rds_password}"
+          "value" : "var.rds_password"
         },
       ],
       "essential" : true,
-      "image" : "${aws_ecr_repository.flaia-repository.repository_url}:latest",
+      "image" : "${aws_ecr_repository.datalake-repository.repository_url}:${var.image_tag}",
       "memory" : 1024,
-      "memoryReservation" : 128,
+      "memoryReservation" : 128, // => The minimum memory required by the container to function properly
       "networkMode" : "awsvpc",
       "portMappings" : [
         {
@@ -37,17 +37,17 @@ resource "aws_ecs_task_definition" "flaia-ecs-task" {
       "logConfiguration" : {
         "logDriver" : "awslogs",
         "options" : {
-          "awslogs-group" : "${aws_cloudwatch_log_group.flaia-app-log-group.name}",
+          "awslogs-group" : "${aws_cloudwatch_log_group.datalake-app-log-group.name}",
           "awslogs-region" : "${var.region}",
-          "awslogs-stream-prefix" : "${aws_cloudwatch_log_stream.flaia-app-log-stream.name}"
+          "awslogs-stream-prefix" : "${aws_cloudwatch_log_stream.datalake-app-log-stream.name}"
         }
       }
     }
   ])
 
   volume {
-    name      = "flaia-app"
-    host_path = "/ecs/flaia-app"
+    name      = "datalake-app"
+    host_path = "/ecs/datalake-app"
   }
 
   placement_constraints {

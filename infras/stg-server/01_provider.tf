@@ -8,6 +8,13 @@ provider "aws" {
       "Project" = "${var.project_name}"
     }
   }
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
+}
+
+# INITIALIZE TERRAFORM REMOTE STATE
+terraform {
+  backend "s3" {
+    bucket = "datalake-stg-server-terraform"
+    key    = "terraform/terraform.tfstate"
+    region = "ap-southeast-1"
+  }
 }

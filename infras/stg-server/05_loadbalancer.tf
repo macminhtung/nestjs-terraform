@@ -1,5 +1,5 @@
-# LOAD BALANCER [flaia_lb]: Initialize loadbalancer
-resource "aws_lb" "flaia_lb" {
+# LOAD BALANCER [datalake_lb]: Initialize loadbalancer
+resource "aws_lb" "datalake_lb" {
   name               = "${var.project_name}-${var.stage}-alb"
   load_balancer_type = "application"
   internal           = false
@@ -7,13 +7,13 @@ resource "aws_lb" "flaia_lb" {
   subnets            = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-2.id]
 }
 
-# ALB TARGET GROUP [flaia-app]: Initialize target group use for loadbalancer
-resource "aws_alb_target_group" "flaia-app" {
+# ALB TARGET GROUP [datalake-app]: Initialize target group use for loadbalancer
+resource "aws_alb_target_group" "datalake-app" {
   name       = "${var.project_name}-${var.stage}"
   port       = 3001
   protocol   = "HTTP"
-  vpc_id     = aws_vpc.flaia-vpc.id
-  depends_on = [aws_lb.flaia_lb]
+  vpc_id     = aws_vpc.datalake-vpc.id
+  depends_on = [aws_lb.datalake_lb]
 
   health_check {
     path                = "${var.health_check_path}"
@@ -28,16 +28,16 @@ resource "aws_alb_target_group" "flaia-app" {
 
 # ALB LISTENER [HTTP]
 resource "aws_alb_listener" "ecs-alb-http-listener" {
-  load_balancer_arn = aws_lb.flaia_lb.id
+  load_balancer_arn = aws_lb.datalake_lb.id
   port              = "80"
   protocol          = "HTTP"
   depends_on = [
-    aws_alb_target_group.flaia-app,
+    aws_alb_target_group.datalake-app,
   ]
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.flaia-app.arn
+    target_group_arn = aws_alb_target_group.datalake-app.arn
   }
 }
 

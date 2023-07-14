@@ -1,7 +1,7 @@
 # AUTO SCALING TARGET [CLUSTER]: Initialize autoscaling target
 resource "aws_appautoscaling_target" "datalake_autoscaling_target" {
   max_capacity       = 5
-  min_capacity       = 1
+  min_capacity       = 2
   resource_id        = "service/${aws_ecs_cluster.datalake-app.name}/${aws_ecs_service.datalake-app.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
@@ -25,4 +25,3 @@ resource "aws_appautoscaling_policy" "datalake_autoscaling_policy" {
     target_value       = 85
   }
 }
-

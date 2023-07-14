@@ -8,10 +8,11 @@ resource "aws_lb" "datalake_lb" {
 }
 
 # ALB TARGET GROUP [datalake-app]: Initialize target group use for loadbalancer
-resource "aws_alb_target_group" "datalake-app" {
+resource "aws_lb_target_group" "datalake-app" {
   name       = "${var.project_name}-${var.stage}"
   port       = 3001
   protocol   = "HTTP"
+  target_type = "ip"
   vpc_id     = aws_vpc.datalake-vpc.id
   depends_on = [aws_lb.datalake_lb]
 
@@ -32,12 +33,12 @@ resource "aws_alb_listener" "ecs-alb-http-listener" {
   port              = "80"
   protocol          = "HTTP"
   depends_on = [
-    aws_alb_target_group.datalake-app,
+    aws_lb_target_group.datalake-app,
   ]
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.datalake-app.arn
+    target_group_arn = aws_lb_target_group.datalake-app.arn
   }
 }
 

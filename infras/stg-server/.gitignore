@@ -1,3 +1,5 @@
 .terraform*
+terraform.tfstate.backup
+terraform.tfstate
 .env
 .DS_Store

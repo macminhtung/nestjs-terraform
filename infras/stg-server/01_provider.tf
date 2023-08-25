@@ -10,11 +10,11 @@ provider "aws" {
   }
 }
 
-# INITIALIZE TERRAFORM REMOTE STATE
-terraform {
-  backend "s3" {
-    bucket = "datalake-stg-server-terraform"
-    key    = "terraform/terraform.tfstate"
-    region = "ap-southeast-1"
-  }
-}
+# # INITIALIZE TERRAFORM REMOTE STATE
+# terraform {
+#   backend "s3" {
+#     bucket = "hrforte-stg-server-terraform"
+#     key    = "terraform/terraform.tfstate"
+#     region = "ap-southeast-1"
+#   }
+# }

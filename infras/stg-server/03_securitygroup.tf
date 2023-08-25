@@ -2,7 +2,7 @@
 resource "aws_security_group" "load-balancer" {
   name        = "load_balancer_security_group"
   description = "Controls access to the ALB"
-  vpc_id      = aws_vpc.datalake-vpc.id
+  vpc_id      = aws_vpc.hrforte-vpc.id
 
   # INBOUND RULES
   ingress {
@@ -32,7 +32,7 @@ resource "aws_security_group" "load-balancer" {
 resource "aws_security_group" "ecs" {
   name        = "ecs_security_group"
   description = "Allows inbound access from the ALB only"
-  vpc_id      = aws_vpc.datalake-vpc.id
+  vpc_id      = aws_vpc.hrforte-vpc.id
 
   # INBOUND RULES
   ingress {
@@ -54,7 +54,7 @@ resource "aws_security_group" "ecs" {
 # # SECURITY GROUP [rds]: Use for RDS
 # resource "aws_security_group" "rds_security_group" {
 #   name   = "rds_security_group_${var.stage}"
-#   vpc_id = aws_vpc.datalake-vpc.id
+#   vpc_id = aws_vpc.hrforte-vpc.id
 
 #   ingress {
 #     from_port   = 5432

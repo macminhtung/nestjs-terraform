@@ -1,5 +1,5 @@
-# ECR REPOSITORY [datalake-repository]: Initialize ecr repository
-resource "aws_ecr_repository" "datalake-repository" {
+# ECR REPOSITORY [hrforte-repository]: Initialize ecr repository
+resource "aws_ecr_repository" "hrforte-repository" {
   name                 = "${var.project_name}"
   image_tag_mutability = "MUTABLE"
   tags = {

@@ -1,6 +1,6 @@
 variable "project_name" {
   description = "Name of product"
-  default     = "datalake"
+  default     = "hrforte"
 }
 
 variable "stage" {
@@ -50,6 +50,15 @@ variable "health_check_path" {
 }
 
 variable "image_tag" {
+}
+
+variable "port" {
+  default = 3001
+  type = number
+}
+
+variable "domain_name" {
+  default = "eva-api.hrforte.com"
 }
 
 # variable "rds_db_name" {

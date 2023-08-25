@@ -1,7 +1,7 @@
 # =========== #
 # ==> VPC <== #
 # =========== #
-resource "aws_vpc" "datalake-vpc" {
+resource "aws_vpc" "hrforte-vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
   enable_dns_hostnames = true
@@ -13,24 +13,24 @@ resource "aws_vpc" "datalake-vpc" {
 
 # ==> INTERNET GATEWAY
 resource "aws_internet_gateway" "internet-gw" {
-  vpc_id = aws_vpc.datalake-vpc.id
+  vpc_id = aws_vpc.hrforte-vpc.id
 }
 
 # SUBNET [public-subnet-(1 -> 2)]
 resource "aws_subnet" "public-subnet-1" {
   cidr_block        = var.public_subnet_1_cidr
-  vpc_id            = aws_vpc.datalake-vpc.id
+  vpc_id            = aws_vpc.hrforte-vpc.id
   availability_zone = var.availability_zones[0]
 }
 resource "aws_subnet" "public-subnet-2" {
   cidr_block        = var.public_subnet_2_cidr
-  vpc_id            = aws_vpc.datalake-vpc.id
+  vpc_id            = aws_vpc.hrforte-vpc.id
   availability_zone = var.availability_zones[1]
 }
 
 # ROUTE TABLE: Allow Public subnets (1) traffic through the Internet Gateway(2)
 resource "aws_route_table" "public-route-table" {
-  vpc_id = aws_vpc.datalake-vpc.id
+  vpc_id = aws_vpc.hrforte-vpc.id
 }
 resource "aws_route" "internet-gw-route" {
   route_table_id         = aws_route_table.public-route-table.id // <== (1)
@@ -70,18 +70,18 @@ resource "aws_eip" "elastic-ip-for-nat-gw" {
 # SUBNET [private-subnet-(1 -> 2)]
 resource "aws_subnet" "private-subnet-1" {
   cidr_block        = var.private_subnet_1_cidr
-  vpc_id            = aws_vpc.datalake-vpc.id
+  vpc_id            = aws_vpc.hrforte-vpc.id
   availability_zone = var.availability_zones[0]
 }
 resource "aws_subnet" "private-subnet-2" {
   cidr_block        = var.private_subnet_2_cidr
-  vpc_id            = aws_vpc.datalake-vpc.id
+  vpc_id            = aws_vpc.hrforte-vpc.id
   availability_zone = var.availability_zones[1]
 }
 
 # ROUTE TABLE: Route the Private subnet(1) traffic through the NAT Gateway (2)
 resource "aws_route_table" "private-route-table" {
-  vpc_id = aws_vpc.datalake-vpc.id
+  vpc_id = aws_vpc.hrforte-vpc.id
 }
 resource "aws_route" "nat-gw-route" {
   route_table_id         = aws_route_table.private-route-table.id // <== (1)

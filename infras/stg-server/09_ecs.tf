@@ -8,7 +8,7 @@ resource "aws_ecs_service" "datalake-app" {
   name            = "${var.project_name}-${var.stage}-service"
   cluster         = aws_ecs_cluster.datalake-app.id
   task_definition = aws_ecs_task_definition.datalake-ecs-task.arn
-  desired_count   = 2
+  desired_count   = 2 // <== Number of task definition to keep running on ecs service
   depends_on      = [aws_iam_role_policy.ecs-instance-role-policy]
   launch_type           = "FARGATE"
 

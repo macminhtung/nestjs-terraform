@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "datalake-ecs-task" {
       ],
       "essential" : true,
       "image" : "${aws_ecr_repository.datalake-repository.repository_url}:${var.image_tag}",
-      "memoryReservation" : 128, // => The minimum memory required by the container to function properly
+      "memoryReservation" : 512, // => The minimum memory required by the container to function properly
       "portMappings" : [
         {
           "containerPort" : 3001

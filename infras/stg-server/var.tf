@@ -49,6 +49,11 @@ variable "health_check_path" {
   default     = "/health-check"
 }
 
+variable "app_port" {
+  description = "Port on which the app is running"
+  default     = 3001
+}
+
 variable "image_tag" {
 }
 

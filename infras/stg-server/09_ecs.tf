@@ -20,6 +20,6 @@ resource "aws_ecs_service" "datalake-app" {
   load_balancer {
     target_group_arn = aws_lb_target_group.datalake-app.arn
     container_name   = "${var.project_name}-${var.stage}-container"
-    container_port   = 3001
+    container_port   = var.app_port
   }
 }

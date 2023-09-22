@@ -10,7 +10,7 @@ resource "aws_lb" "datalake_lb" {
 # ALB TARGET GROUP [datalake-app]: Initialize target group use for loadbalancer
 resource "aws_lb_target_group" "datalake-app" {
   name       = "${var.project_name}-${var.stage}"
-  port       = 3001
+  port       = var.app_port
   protocol   = "HTTP"
   target_type = "ip"
   vpc_id     = aws_vpc.datalake-vpc.id

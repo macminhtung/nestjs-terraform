@@ -29,9 +29,10 @@ resource "aws_subnet" "public-subnet-2" {
 }
 
 # ROUTE TABLE: Allow Public subnets (1) traffic through the Internet Gateway(2)
-resource "aws_route_table" "public-route-table" {
-  vpc_id = aws_vpc.datalake-vpc.id
+resource "aws_default_route_table" "public-route-table" {
+  default_route_table_id = aws_vpc.datalake-vpc.default_route_table_id
 }
+
 resource "aws_route" "internet-gw-route" {
   route_table_id         = aws_route_table.public-route-table.id // <== (1)
   gateway_id             = aws_internet_gateway.internet-gw.id // <== (2)
@@ -40,11 +41,11 @@ resource "aws_route" "internet-gw-route" {
 
 # ROUTE TABLE ASSOCIATION: Associate [public-subnet-(1 -> 2)] with a [public-route-table]
 resource "aws_route_table_association" "public-route-1-association" {
-  route_table_id = aws_route_table.public-route-table.id
+  route_table_id = aws_default_route_table.public-route-table.id
   subnet_id      = aws_subnet.public-subnet-1.id
 }
 resource "aws_route_table_association" "public-route-2-association" {
-  route_table_id = aws_route_table.public-route-table.id
+  route_table_id = aws_default_route_table.public-route-table.id
   subnet_id      = aws_subnet.public-subnet-2.id
 }
 

@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "datalake-ecs-task" {
       "memoryReservation" : 512, // => The minimum memory required by the container to function properly
       "portMappings" : [
         {
-          "containerPort" : 3001
+          "containerPort" : var.app_port
         }
       ],
       "logConfiguration" : {

@@ -36,8 +36,8 @@ resource "aws_security_group" "ecs" {
 
   # INBOUND RULES
   ingress {
-    from_port       = 0
-    to_port         = 0
+    from_port       = var.app_port
+    to_port         = var.app_port
     protocol        = "-1"
     security_groups = [aws_security_group.load-balancer.id] // <== Allows inbound access from the ALB only
   }
